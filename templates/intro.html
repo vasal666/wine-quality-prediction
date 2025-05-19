@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qualivino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay for contrast */
+            min-height: 100vh;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-top: 20px;
+        }
+
+        .circular-logo {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 40px auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .typewriter {
+            font-size: 20px;
+            margin-top: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid white;
+            animation: typing 3s steps(40) 1s 1 normal both,
+                       blinkTextCursor 500ms steps(40) infinite normal;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blinkTextCursor {
+            from { border-right-color: white; }
+            to { border-right-color: transparent; }
+        }
+
+        p {
+            font-size: 20px;
+            margin: 10px auto 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            background-color: white;
+            color: #800026;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #f8d7da;
+        }
+
+        h2 {
+            margin-top: 60px;
+            font-size: 28px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .step {
+            background-color: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        footer a {
+            color: #ffb3c6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Background Video -->
+<video class="video-background" autoplay muted loop>
+    <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<!-- Overlay Content -->
+<div class="overlay">
+
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='qualivino_logo.png') }}" alt="Qualivino Logo" class="circular-logo">
+    </div>
+
+    <div class="glass-card">
+        <h1>Welcome to Qualivino 🍷</h1>
+        <div class="typewriter">Your smart wine quality prediction companion.</div>
+        <p>Discover insights with just a few clicks.</p>
+        <button class="btn" onclick="startApp()">Get Started</button>
+
+    </div>
+
+    <div class="features">
+        <h2>🔍 Features</h2>
+        <ul>
+            <li>🍷 Predict red & white wine quality</li>
+            <li>📊 Visualize prediction probabilities</li>
+            <li>📈 Feature importance breakdown</li>
+            <li>📝 View your prediction history</li>
+        </ul>
+    </div>
+
+    <div class="how-it-works">
+        <h2>⚙️ How It Works</h2>
+        <div class="steps">
+            <div class="step">1️⃣ Upload wine data</div>
+            <div class="step">2️⃣ Model analyzes key factors</div>
+            <div class="step">3️⃣ See predicted quality & score</div>
+        </div>
+    </div>
+
+    <div class="model-info">
+        <h2>💡 Powered by Machine Learning</h2>
+        <p>
+            Qualivino uses Random Forest, LightGBM, and XGBoost trained on real-world wine data with SMOTE and feature engineering.
+        </p>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by Vasal • <a href="#">GitHub</a> • <a href="#">Contact</a></p>
+    </footer>
+
+</div>
+<script>
+    function startApp() {
+        const overlay = document.querySelector('.overlay');
+        overlay.style.animation = 'fadeOutUp 1s ease forwards';
+        setTimeout(() => {
+            window.location.href = "/predictor";
+        }, 1000); // Match animation duration
+    }
+</script>
+
+</body>
+</html>

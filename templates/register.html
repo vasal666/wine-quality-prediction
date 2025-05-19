@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qualivino - Register</title>
+    <style>
+        /* Identical styles to login.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+            padding: 60px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #ffb3c6;
+        }
+        .btn {
+            background-color: white;
+            color: #800026;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #f8d7da;
+        }
+        .error {
+            color: #f8d7da;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .link {
+            color: #ffb3c6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .glass-card {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay">
+        <div class="glass-card">
+            <h1>Register for Qualivino</h1>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+            <p style="margin-top: 20px;">
+                Already have an account? <a href="{{ url_for('login') }}" class="link">Login here</a>
+            </p>
+        </div supplements
+    </div>
+</body>
+</html>
